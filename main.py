@@ -2,9 +2,8 @@
 # https://realpython.com/pygame-a-primer/#basic-pygame-program
 
 import pygame
-import math
+import math.maheshwashere
 from pygame.locals import (
-  RLEACCEL,
   K_UP,
   K_DOWN,
   K_LEFT,
@@ -35,6 +34,9 @@ class Projectile(pygame.sprite.Sprite):
     self.speedy = speedy
 
   def move(self, gravity=10):
+    print("vx: "+str(self.speedx))
+    print("vy: "+str(self.speedy))
+    print("(x, y): "+str(self.x)+str(self.y))
     self.x += self.speedx
     self.y += self.speedy
     self.speedy += gravity
@@ -65,7 +67,7 @@ class Tank(pygame.sprite.Sprite):
       self.launchAngle += 5
     else:
       self.launchAngle -= 5
-    print(f"adjusted angle to {self.angle} degrees")
+    print(f"adjusted angle to {self.launchAngle} degrees")
   def move(self, amnt):
     tempdx = self.dx+amnt
     if math.fabs(tempdx) > 100:
@@ -82,9 +84,9 @@ class Tank(pygame.sprite.Sprite):
 
 def gameInit():
   global currentPlayer, playerOne, playerTwo
-  playerOne = Tank(100, 600, 10, 45, "images\smallBlueTank.png")
+  playerOne = Tank(100, 600, 1, -45, "images\smallBlueTank.png")
   currentPlayer = playerOne
-  playerTwo = Tank(700, 600, 10, 135, "images\smallRedTank.png")
+  playerTwo = Tank(700, 600, 1, -135, "images\smallRedTank.png")
 
 
 def update():
@@ -118,7 +120,7 @@ def update():
     print("should not have reached here")
 def gameLoop():
   pygame.init()
-  fps = 60
+  fps = 20
   timer = pygame.time.Clock()
   
   global screen
