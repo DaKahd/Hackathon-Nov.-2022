@@ -67,7 +67,8 @@ class Tank(pygame.sprite.Sprite):
       self.launchAngle -= 5
 
   def move(self, amnt):
-    if self.dx + math.fabs(amnt) > 20:
+    tempdx = self.dx+amnt
+    if math.abs(tempdx) > 100:
       return
     self.x += amnt
     self.dx += math.fabs(amnt)
