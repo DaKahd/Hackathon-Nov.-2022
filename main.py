@@ -45,7 +45,6 @@ class Projectile(pygame.sprite.Sprite):
     elif pygame.sprite.spritecollide(self, playerTwo):
       return playerTwo
 
-
 class Tank(pygame.sprite.Sprite):
 
   def __init__(self, x, y, launchSpeed, launchAngle, pictureName):
@@ -60,8 +59,6 @@ class Tank(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.dx = 0
 
-  def render(self):
-    screen.blit(self.image, (self.x,self.y))
 
   def adjustAngle(self, upNotDown):
     if upNotDown:
@@ -111,7 +108,8 @@ def update():
     currentPlayer.adjustAngle(False)
   screen.blit(playerOne.image, (playerOne.x, playerOne.y))
   screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
-  screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
+  if currentProjectile!=None:
+    screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 def gameLoop():
   pygame.init()
   fps = 60
