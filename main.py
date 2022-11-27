@@ -55,6 +55,7 @@ class Tank(pygame.sprite.Sprite):
     self.launchAngle = launchAngle
     self.surf = pygame.image.load(pictureName).convert()
     self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+    self.image = pygame.image.load(pictureName)
     self.rect = self.surf.get_rect()
     self.dx = 0
 
@@ -123,7 +124,6 @@ def gameLoop():
           running = False
       screen.fill((255, 255, 255))
       update()
-    # start writing code here
 
     pygame.display.flip()
   pygame.quit()
