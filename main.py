@@ -109,7 +109,8 @@ def update():
     currentProjectile.move()
     screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 
-  
+  if keys[K_SPACE] and currentProjectile==None:
+  currentPlayer.launch()
   if currentPlayer == playerOne:
     currentPlayer = playerTwo
   elif currentPlayer == playerTwo:
