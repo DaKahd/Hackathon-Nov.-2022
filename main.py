@@ -107,9 +107,9 @@ def update():
     currentPlayer.adjustAngle(True)
   if keys[K_DOWN]:
     currentPlayer.adjustAngle(False)
-  screen.blit()
-
-
+  screen.blit(playerOne.image, (playerOne.x, playerOne.y))
+  screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
+  screen.blit(currentProjectile.image)
 def gameLoop():
   pygame.init()
   fps = 60
