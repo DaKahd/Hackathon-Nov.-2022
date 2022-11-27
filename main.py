@@ -68,7 +68,7 @@ class Tank(pygame.sprite.Sprite):
 
   def move(self, amnt):
     tempdx = self.dx+amnt
-    if math.abs(tempdx) > 100:
+    if math.fabs(tempdx) > 100:
       return
     self.x += amnt
     self.dx += math.fabs(amnt)
