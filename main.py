@@ -129,7 +129,7 @@ def gameLoop():
       elif event.type == KEYDOWN:
         if event.key == K_ESCAPE:
           running = False
-      # screen.fill((255, 255, 255))
+      screen.fill((255, 255, 255))
       update()
 
     pygame.display.flip()
