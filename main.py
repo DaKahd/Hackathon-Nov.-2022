@@ -94,20 +94,22 @@ def update():
   
   if keys[K_RIGHT]:
     currentPlayer.move(5)
-  if keys[K_LEFT]:
+  elif keys[K_LEFT]:
     currentPlayer.move(-5)
-  if keys[K_UP]:
+  elif keys[K_UP]:
     currentPlayer.adjustAngle(True)
-  if keys[K_DOWN]:
+  elif keys[K_DOWN]:
     currentPlayer.adjustAngle(False)
+  elif keys[K_SPACE] and currentProjectile==None:
+    currentPlayer.launch()
+  
   screen.blit(playerOne.image, (playerOne.x, playerOne.y))
   screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
   if currentProjectile!=None:
     currentProjectile.move()
     screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 
-  if keys[K_SPACE] AND currentProjectile==None:
-  currentPlayer.launch()
+  
   if currentPlayer == playerOne:
     currentPlayer = playerTwo
   elif currentPlayer == playerTwo:
