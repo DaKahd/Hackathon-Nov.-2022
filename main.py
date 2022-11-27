@@ -99,9 +99,9 @@ def update():
     else:
       print("should not have reached here")
   if keys[K_RIGHT]:
-    currentPlayer.move(5, 0)
+    currentPlayer.move(5)
   if keys[K_LEFT]:
-    currentPlayer.move(-5, 0)
+    currentPlayer.move(-5)
   if keys[K_UP]:
     currentPlayer.adjustAngle(True)
   if keys[K_DOWN]:
