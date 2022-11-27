@@ -28,7 +28,7 @@ class Projectile(pygame.sprite.Sprite):
     # self.surf.set_colorkey((255, 255, 255), RLEACCEL)
     self.image = pygame.image.load(image)
 
-    self.rect = self.surf.get_rect()
+    # self.rect = self.surf.get_rect()
     self.x = x
     self.y = y
     self.speedx = speedx
@@ -71,7 +71,7 @@ class Tank(pygame.sprite.Sprite):
     if math.fabs(tempdx) > 100:
       return
     self.x += amnt
-    self.dx += math.fabs(amnt)
+    self.dx += amnt
     self.rect.move_ip(amnt, 0)
 
   def launch(self):
