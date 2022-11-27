@@ -24,8 +24,10 @@ class Projectile(pygame.sprite.Sprite):
 
   def __init__(self, x, y, speedx, speedy, image):
     super(Projectile, self).__init__()
-    self.surf = pygame.image.load(image).convert()
-    self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+    # self.surf = pygame.image.load(image).convert()
+    # self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+    self.image = pygame.image.load(image)
+
     self.rect = self.surf.get_rect()
     self.x = x
     self.y = y
@@ -52,8 +54,8 @@ class Tank(pygame.sprite.Sprite):
     self.y = y
     self.launchSpeed = launchSpeed
     self.launchAngle = launchAngle
-    self.surf = pygame.image.load(pictureName).convert()
-    self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+    # self.surf = pygame.image.load(pictureName).convert()
+    # self.surf.set_colorkey((255, 255, 255), RLEACCEL)
     self.image = pygame.image.load(pictureName)
     self.rect = self.image.get_rect()
     self.dx = 0
@@ -109,7 +111,7 @@ def update():
     currentPlayer.adjustAngle(False)
   screen.blit(playerOne.image, (playerOne.x, playerOne.y))
   screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
-  screen.blit(currentProjectile.image)
+  screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 def gameLoop():
   pygame.init()
   fps = 60
