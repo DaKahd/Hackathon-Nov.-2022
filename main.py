@@ -18,7 +18,7 @@ currentPlayer = None
 currentProjectile = None
 playerOne = None
 playerTwo = None
-
+all_sprites = None
 
 class Projectile(pygame.sprite.Sprite):
 
@@ -42,7 +42,6 @@ class Projectile(pygame.sprite.Sprite):
       return playerOne
     elif pygame.sprite.spritecollide(self, playerTwo):
       return playerTwo
-    print("placeholder")
 
 
 class Tank(pygame.sprite.Sprite):
@@ -56,8 +55,11 @@ class Tank(pygame.sprite.Sprite):
     self.surf = pygame.image.load(pictureName).convert()
     self.surf.set_colorkey((255, 255, 255), RLEACCEL)
     self.image = pygame.image.load(pictureName)
-    self.rect = self.surf.get_rect()
+    self.rect = self.image.get_rect()
     self.dx = 0
+
+  def render(self):
+    screen.blit(self.image, (self.x,self.y))
 
   def adjustAngle(self, upNotDown):
     if upNotDown:
@@ -75,7 +77,7 @@ class Tank(pygame.sprite.Sprite):
   def launch(self):
     global currentProjectile
     currentProjectile = Projectile(self.x, self.y, self.launchSpeed * math.cos(self.launchAngle),
-                                   self.launchSpeed * math.sin(self.launchAngle), "images\smallBlueTank.png")
+    self.launchSpeed * math.sin(self.launchAngle), "images\smallBlueTank.png")
 
 
 def gameInit():
@@ -110,8 +112,9 @@ def update():
 
 def gameLoop():
   pygame.init()
+  global screen
   screen = pygame.display.set_mode([800, 800])
-
+  screen.fill((255, 255, 255))
   running = True
   gameInit()
   while running:
@@ -122,7 +125,7 @@ def gameLoop():
       elif event.type == KEYDOWN:
         if event.key == K_ESCAPE:
           running = False
-      screen.fill((255, 255, 255))
+      # screen.fill((255, 255, 255))
       update()
 
     pygame.display.flip()
