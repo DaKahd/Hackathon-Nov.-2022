@@ -13,7 +13,7 @@ from pygame.locals import (
   K_ESCAPE,
   KEYDOWN,
 )
-
+screen = None
 currentPlayer = None
 currentProjectile = None
 playerOne = None
@@ -77,7 +77,7 @@ class Tank(pygame.sprite.Sprite):
   def launch(self):
     global currentProjectile
     currentProjectile = Projectile(self.x, self.y, self.launchSpeed * math.cos(self.launchAngle),
-    self.launchSpeed * math.sin(self.launchAngle), "images\smallBlueTank.png")
+    self.launchSpeed * math.sin(self.launchAngle), "images\smallTankProjectile.png")
 
 
 def gameInit():
@@ -107,17 +107,21 @@ def update():
     currentPlayer.adjustAngle(True)
   if keys[K_DOWN]:
     currentPlayer.adjustAngle(False)
-
+  screen.blit()
 
 
 def gameLoop():
   pygame.init()
+  fps = 60
+  timer = pygame.time.Clock()
+  
   global screen
   screen = pygame.display.set_mode([800, 800])
   screen.fill((255, 255, 255))
   running = True
   gameInit()
   while running:
+    timer.tick(fps)
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         print("quit")
