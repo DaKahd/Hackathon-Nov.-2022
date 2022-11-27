@@ -2,7 +2,7 @@
 # https://realpython.com/pygame-a-primer/#basic-pygame-program
 
 import pygame
-import math.maheshwashere
+import math
 from pygame.locals import (
   K_UP,
   K_DOWN,
@@ -40,7 +40,8 @@ class Projectile(pygame.sprite.Sprite):
     self.x += self.speedx
     self.y += self.speedy
     self.speedy += gravity
-
+    if self.y>800 or self.x<0 or self.x>800
+      self = None
   def intercepts(self):
     if pygame.sprite.spritecollide(self, playerOne):
       return playerOne
@@ -78,8 +79,8 @@ class Tank(pygame.sprite.Sprite):
 
   def launch(self):
     global currentProjectile
-    currentProjectile = Projectile(self.x, self.y, self.launchSpeed * math.cos(self.launchAngle),
-    self.launchSpeed * math.sin(self.launchAngle), "images\smallTankProjectile.png")
+    currentProjectile = Projectile(self.x, self.y, self.launchSpeed * math.sin(self.launchAngle),
+    self.launchSpeed * math.cos(self.launchAngle), "images\smallTankProjectile.png")
 
 
 def gameInit():
@@ -93,7 +94,8 @@ def update():
   keys = pygame.key.get_pressed()
   # print("hit Key " + str(keys))
   global currentPlayer, playerOne, playerTwo
-  
+  screen.blit(playerOne.image, (playerOne.x, playerOne.y))
+  screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
   if keys[K_RIGHT]:
     currentPlayer.move(5)
   elif keys[K_LEFT]:
@@ -104,20 +106,19 @@ def update():
     currentPlayer.adjustAngle(False)
   elif keys[K_SPACE] and currentProjectile==None:
     currentPlayer.launch()
+    if currentPlayer == playerOne:
+      currentPlayer = playerTwo
+    elif currentPlayer == playerTwo:
+      currentPlayer = playerOne
+    else:
+      print("should not have reached here")
   
-  screen.blit(playerOne.image, (playerOne.x, playerOne.y))
-  screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
   if currentProjectile!=None:
     currentProjectile.move()
     screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 
   
-  if currentPlayer == playerOne:
-    currentPlayer = playerTwo
-  elif currentPlayer == playerTwo:
-    currentPlayer = playerOne
-  else:
-    print("should not have reached here")
+  
 def gameLoop():
   pygame.init()
   fps = 20
