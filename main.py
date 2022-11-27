@@ -12,7 +12,6 @@ from pygame.locals import (
   K_SPACE,
   K_ESCAPE,
   KEYDOWN,
-  QUIT,
 )
 
 currentPlayer = None
@@ -36,9 +35,9 @@ class Projectile(pygame.sprite.Sprite):
   def move(self, gravity=10):
     self.x += self.speedx
     self.y += self.speedy
-    self.speedy += self.gravity
+    self.speedy += gravity
 
-  def intercepts(self, tank):
+  def intercepts(self):
     if pygame.sprite.spritecollide(self, playerOne):
       return playerOne
     elif pygame.sprite.spritecollide(self, playerTwo):
@@ -72,22 +71,22 @@ class Tank(pygame.sprite.Sprite):
     self.dx += math.fabs(amnt)
     self.rect.move_ip(amnt, 0)
 
-  def launch(self, speed, angle):
+  def launch(self):
     global currentProjectile
-    currentProjectile = Projectile(self.x, self.y, speed * math.cos(angle),
-                                   speed * math.sin(angle))
+    currentProjectile = Projectile(self.x, self.y, self.launchSpeed * math.cos(self.launchAngle),
+                                   self.launchSpeed * math.sin(self.launchAngle), "images\smallBlueTank.png")
 
 
 def gameInit():
   global currentPlayer, playerOne, playerTwo
-  playerOne = Tank(100, 600, 10, 45, "images/smallBlueTank.png")
+  playerOne = Tank(100, 600, 10, 45, "images\smallBlueTank.png")
   currentPlayer = playerOne
-  playerTwo = Tank(700, 600, 10, 135, "images/smallRedTank.png")
+  playerTwo = Tank(700, 600, 10, 135, "images\smallRedTank.png")
 
 
 def update():
   keys = pygame.key.get_pressed()
-  print("hit Key " + str(keys))
+  # print("hit Key " + str(keys))
   global currentPlayer, playerOne, playerTwo
   if keys[K_SPACE]:
     currentPlayer.launch()
@@ -106,7 +105,6 @@ def update():
   if keys[K_DOWN]:
     currentPlayer.adjustAngle(False)
 
-  #danny write this
 
 
 def gameLoop():
