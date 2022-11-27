@@ -65,7 +65,7 @@ class Tank(pygame.sprite.Sprite):
       self.launchAngle += 5
     else:
       self.launchAngle -= 5
-
+    print(f"adjusted angle to {self.angle} degrees")
   def move(self, amnt):
     tempdx = self.dx+amnt
     if math.fabs(tempdx) > 100:
@@ -91,14 +91,7 @@ def update():
   keys = pygame.key.get_pressed()
   # print("hit Key " + str(keys))
   global currentPlayer, playerOne, playerTwo
-  if keys[K_SPACE]:
-    currentPlayer.launch()
-    if currentPlayer == playerOne:
-      currentPlayer = playerTwo
-    elif currentPlayer == playerTwo:
-      currentPlayer = playerOne
-    else:
-      print("should not have reached here")
+  
   if keys[K_RIGHT]:
     currentPlayer.move(5)
   if keys[K_LEFT]:
@@ -110,7 +103,17 @@ def update():
   screen.blit(playerOne.image, (playerOne.x, playerOne.y))
   screen.blit(playerTwo.image, (playerTwo.x, playerTwo.y))
   if currentProjectile!=None:
+    currentProjectile.move()
     screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
+
+  if keys[K_SPACE]&&currentProjectile==None:
+  currentPlayer.launch()
+  if currentPlayer == playerOne:
+    currentPlayer = playerTwo
+  elif currentPlayer == playerTwo:
+    currentPlayer = playerOne
+  else:
+    print("should not have reached here")
 def gameLoop():
   pygame.init()
   fps = 60
