@@ -40,8 +40,10 @@ class Projectile(pygame.sprite.Sprite):
     self.x += self.speedx
     self.y += self.speedy
     self.speedy += gravity
-    if self.y>800 or self.x<0 or self.x>800
+    if self.y>800 or self.x<0 or self.x>800:
       self = None
+
+      
   def intercepts(self):
     if pygame.sprite.spritecollide(self, playerOne):
       return playerOne
@@ -117,8 +119,6 @@ def update():
     currentProjectile.move()
     screen.blit(currentProjectile.image, (currentProjectile.x, currentProjectile.y))
 
-  
-  
 def gameLoop():
   pygame.init()
   fps = 20
