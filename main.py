@@ -78,7 +78,8 @@ class Tank(pygame.sprite.Sprite):
 
     def takeDamage(self, speed):
         self.health -= speed / 3
-        print(self.health)
+        # print(self.health)
+        dead(self)
 
     def dead(self):
         if self.health <= 0:
