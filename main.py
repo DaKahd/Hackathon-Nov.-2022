@@ -30,6 +30,7 @@ class Projectile(pygame.sprite.Sprite):
         # self.surf = pygame.image.load(image).convert()
         # self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.image = pygame.image.load(image)
+        self.image = pygame.transform.scale(self.image, (10,10))
         self.rect = self.image.get_rect()
         # self.rect = self.surf.get_rect()
         self.x = x
@@ -79,11 +80,8 @@ class Tank(pygame.sprite.Sprite):
     def takeDamage(self, speed):
         self.health -= speed / 3
         # print(self.health)
-        dead(self)
-
-    def dead(self):
         if self.health <= 0:
-            gameOver(self)
+          gameOver(self)
 
     def adjustStrength(self, upNotDown):
         delta = 0
@@ -136,12 +134,22 @@ def angleText():
     red = (255, 0, 0)
     font = pygame.font.Font('freesansbold.ttf', 32)
     blueAngle = font.render(str(playerOne.launchAngle)+"\u00B0", True, blue)
-    redAngle = font.render(str(90-playerTwo.launchAngle)+"\u00B0", True, red)
+    redAngle = font.render(str(180-playerTwo.launchAngle)+"\u00B0", True, red)
     blueRect = blueAngle.get_rect()
     redRect = redAngle.get_rect()
     blueRect.center = (100, 200)
     redRect.center = (700, 200)
-
+  
+def strengthText():
+  global font, blueStrength, blueRect, redStrength, redRect, blue, red, playerOne, playerTwo
+ 
+  blueStrength = font.render(str(playerOne.launchStrength), True, blue)
+  redStrength = font.render(str(playerTwo.launchStrength), True, red)
+  blueRect = blueStrength.get_rect()
+  redRect = redAngle.get_rect()
+  blueRect.center(100, 300)
+  redRect.center(700, 300)
+  
 def background():
     global bg_img
     bg_img = pygame.image.load("images/background.jpeg")
